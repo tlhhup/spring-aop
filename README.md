@@ -92,7 +92,7 @@
 			Waiter proxy = (Waiter) proxyFactory.getProxy();
 			proxy.greetTo("王五");
 	5. 切点：以上的处理会对代理对象中所有的方法都添加增强，当需要只针对某些方法添加增强时则需要使用切点进行控制
-		1. spring通过Pointcut接口来描述切点，Pointcut由ClassFilter和MethodMatcher构造，通过ClassFilter定义到某些特定的类上，通过MethodMatcher定位到某些特定的方法上。
+		1. spring通过Pointcut接口来描述切点，Pointcut由ClassFilter和MethodMatcher构造，**通过ClassFilter定义到某些特定的类上，通过MethodMatcher定位到某些特定的方法**上。
 		2. MethodMatcher(方法匹配器)：
 			1. 静态方法匹配器：仅对方法名签名(方法名和入参类型及顺序)进行匹配，只会执行一次
 			2. 动态方法匹配器：在运行期检查方法入参的值，调用方法时都会执行
