@@ -10,5 +10,23 @@
            http://www.springframework.org/schema/aop/spring-aop-4.2.xsd  
            http://www.springframework.org/schema/tx  
            http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+   
+    <!-- 配置增强bean -->
+    <bean id="adviceBean" class="com.springaop.advice.AdviceBean"/>
+    
+    <aop:config>
+        <!-- 前置增强 注入增强 -->
+        <aop:aspect ref="adviceBean">
+            <!-- 设置增强的代码 -->
+            <aop:before method="before" pointcut="execution(* *..*Waiter.greeTo(..))"/>
+        </aop:aspect>
+        <!-- 环绕增强 -->
+        <aop:aspect ref="adviceBean">
+            <aop:around method="round" pointcut="execution(* *..*Waiter.*(..))"/>
+        </aop:aspect>
+    </aop:config>
+    
+    <bean class="com.springaop.service.ZhangSanWaiter"/>
+    <bean class="com.springaop.service.LisiWaiter"/>
     
 </beans>
