@@ -26,6 +26,38 @@ public class GreetingTest {
 		proxy.greetTo("王五");
 		
 		proxy.serverTo("王五");
+		
+	}
+	
+	@Test
+	public void greetSpecialMethodTest(){
+		//创建代理对象
+		ListWaiter target=new ListWaiter();
+		
+		ProxyFactory proxyFactory=new ProxyFactory();
+		
+		//JDK--->面向接口
+		//设置代理对象
+		proxyFactory.setTarget(target);
+		//设置接口
+		proxyFactory.setInterfaces(target.getClass().getInterfaces());
+
+		//创建增强
+		GreetingAdvice advice=new GreetingAdvice();
+		//切点
+		ServerStaticMethodMatcherAdvisor advisor=new ServerStaticMethodMatcherAdvisor();
+		//注入增强---->产生切面
+		advisor.setAdvice(advice);
+		
+		//设置切面
+		proxyFactory.addAdvisor(advisor);
+		
+		//创建代理对象
+		Waiter proxy = (Waiter) proxyFactory.getProxy();
+		proxy.greetTo("王五");
+		
+		proxy.serverTo("王五");
+		
 	}
 	
 	@Test
